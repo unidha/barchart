@@ -78,7 +78,7 @@ d3.csv("data.csv", function(error, data) {
       .call(yAxis);
 
   var legend = svg.selectAll(".legend")
-      .data(ageNames)
+      .data(ageNames.reverse())
     .enter().append("g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
