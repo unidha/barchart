@@ -1,6 +1,7 @@
-D3 2.10 adds support for optional outer padding with [d3.scale.ordinal](https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-ordinal). This parameter allows you to control the outer padding (before the first bar and after the last bar) separately from the inner padding between bars. In this case, the inner padding is 10% and the outer padding is 20%.
+This simple bar chart is constructed from a TSV file storing the frequency of letters in the English language. The chart employs [conventional margins](http://bl.ocks.org/3019563) and a number of D3 features:
 
-```javascript
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1, .2);
-```
+* [d3.tsv](https://github.com/mbostock/d3/wiki/CSV) - load and parse data
+* [d3.scale.ordinal](https://github.com/mbostock/d3/wiki/Ordinal-Scales) - *x*-position encoding
+* [d3.scale.linear](https://github.com/mbostock/d3/wiki/Quantitative-Scales) - *y*-position encoding
+* [d3.max](https://github.com/mbostock/d3/wiki/Arrays#wiki-d3_max) - compute domains
+* [d3.svg.axis](https://github.com/mbostock/d3/wiki/SVG-Axes) - display axes
