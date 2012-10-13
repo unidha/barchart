@@ -58,15 +58,14 @@ d3.csv("data.csv", function(error, data) {
 
   data.forEach(function(d) {
     var y0 = 0;
-    d.ages = ageNames.map(function(name) {
-      return {name: name, y0: y0, y1: y0 += +d[name]};
-    });
+    d.ages = ageNames.map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
+    d.total = d.ages[d.ages.length - 1].y1;
   });
 
-  data.sort(function(a, b) { return b.Total - a.Total; });
+  data.sort(function(a, b) { return b.total - a.total; });
 
   x.domain(data.map(function(d) { return d.State; }));
-  y.domain([0, d3.max(data, function(d) { return d.ages[d.ages.length - 1].y1; })]);
+  y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
   svg.append("g")
       .attr("class", "x axis")
