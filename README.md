@@ -3,7 +3,7 @@ This stacked bar chart is constructed from a CSV file storing the populations of
 * [d3.csv](https://github.com/mbostock/d3/wiki/CSV) - load and parse data
 * [d3.scale.ordinal](https://github.com/mbostock/d3/wiki/Ordinal-Scales) - *x*-position encoding
 * [d3.scale.linear](https://github.com/mbostock/d3/wiki/Quantitative-Scales) - *y*-position encoding
-* d3.scale.category20 - color encoding
+* d3.scale.ordinal - color encoding
 * d3.format - SI prefix formatting (e.g., “10M” for 10,000,000)
 * [d3.max](https://github.com/mbostock/d3/wiki/Arrays#wiki-d3_max) - compute domains
 * [d3.svg.axis](https://github.com/mbostock/d3/wiki/SVG-Axes) - display axes
