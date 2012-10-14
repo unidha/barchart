@@ -70,17 +70,17 @@ d3.csv("data.csv", function(error, data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("Population");
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
 
   var state = svg.selectAll(".state")
       .data(data)
