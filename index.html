@@ -30,8 +30,10 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var x = d3.scale.ordinal()
+var x0 = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
+
+var x1 = d3.scale.ordinal();
 
 var y = d3.scale.linear()
     .range([height, 0]);
@@ -40,7 +42,7 @@ var color = d3.scale.ordinal()
     .range(["#b2182b", "#ef8a62", "#fddbc7", "#f7f7f7", "#d1e5f0", "#67a9cf", "#2166ac"]);
 
 var xAxis = d3.svg.axis()
-    .scale(x)
+    .scale(x0)
     .orient("bottom");
 
 var yAxis = d3.svg.axis()
@@ -58,15 +60,12 @@ d3.csv("data.csv", function(error, data) {
   var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "State"; });
 
   data.forEach(function(d) {
-    var y0 = 0;
-    d.ages = ageNames.map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
-    d.total = d.ages[d.ages.length - 1].y1;
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name]}; });
   });
 
-  data.sort(function(a, b) { return b.total - a.total; });
-
-  x.domain(data.map(function(d) { return d.State; }));
-  y.domain([0, d3.max(data, function(d) { return d.total; })]);
+  x0.domain(data.map(function(d) { return d.State; }));
+  x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
+  y.domain([0, d3.max(data, function(d) { return d3.max(d.ages, function(d) { return d.value; }); })]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -100,14 +99,15 @@ d3.csv("data.csv", function(error, data) {
       .data(data)
     .enter().append("g")
       .attr("class", "g")
-      .attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; });
+      .attr("transform", function(d) { return "translate(" + x0(d.State) + ",0)"; });
 
   state.selectAll("rect")
       .data(function(d) { return d.ages; })
     .enter().append("rect")
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.y1); })
-      .attr("height", function(d) { return y(d.y0) - y(d.y1); })
+      .attr("width", x1.rangeBand())
+      .attr("x", function(d) { return x1(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
       .style("fill", function(d) { return color(d.name); });
 
 });

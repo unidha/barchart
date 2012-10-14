@@ -1,4 +1,4 @@
-This stacked bar chart is constructed from a CSV file storing the populations of different states by age group. Colors by [Cynthia Brewer](http://colorbrewer2.org/). The chart employs [conventional margins](http://bl.ocks.org/3019563) and a number of D3 features:
+This grouped bar chart is constructed from a CSV file storing the populations of different states by age group. Colors by [Cynthia Brewer](http://colorbrewer2.org/). The chart employs [conventional margins](http://bl.ocks.org/3019563) and a number of D3 features:
 
 * [d3.csv](https://github.com/mbostock/d3/wiki/CSV) - load and parse data
 * [d3.scale.ordinal](https://github.com/mbostock/d3/wiki/Ordinal-Scales) - *x*-position encoding and color encoding
@@ -7,5 +7,3 @@ This stacked bar chart is constructed from a CSV file storing the populations of
 * [d3.max](https://github.com/mbostock/d3/wiki/Arrays#wiki-d3_max) - compute domains
 * [d3.keys](https://github.com/mbostock/d3/wiki/Arrays#wiki-d3_keys) - compute column names
 * [d3.svg.axis](https://github.com/mbostock/d3/wiki/SVG-Axes) - display axes
-
-This example doesn’t use [d3.layout.stack](https://github.com/mbostock/d3/wiki/Stack-Layout) because it’s easy to just stack each state independently via [array.forEach](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/forEach).
